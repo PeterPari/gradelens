@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "GradeLens — Canvas Grade Calculator",
+  "short_name": "GradeLens",
+  "version": "1.0.0",
+  "description": "See your real grade in every Canvas class, even when the teacher hides totals. What-if scores and \"what do I need?\" built in.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "GradeLens",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*.instructure.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.instructure.com/*"
+      ],
+      "js": [
+        "src/accents.js",
+        "src/recolor.js",
+        "src/dark.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.instructure.com/*"
+      ],
+      "js": [
+        "src/grade-core.js",
+        "src/shared.js",
+        "src/icons.js",
+        "src/ui-styles.js",
+        "src/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
